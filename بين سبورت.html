@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSSAMA TV - Legendary Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.6);
+            --bg-dark: #050505;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+        }
+
+        /* خلفية النيون المتحركة */
+        .nebula-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+            filter: blur(80px);
+        }
+
+        /* لوحة الزجاج الأسطورية */
+        .legendary-container {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        /* بطاقة القناة - المستوى الأسطوري */
+        .legendary-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .legendary-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 40%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .legendary-card:hover::before {
+            opacity: 1;
+        }
+
+        .legendary-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-glow);
+        }
+
+        /* انعكاس سفلي */
+        .reflection {
+            -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(255, 255, 255, 0.1));
+        }
+
+        /* شعار الهالة (Halo Logo) */
+        .halo-logo {
+            width: 180px; height: 180px;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .halo-ring {
+            position: absolute;
+            width: 100%; height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            animation: rotateHalo 12s linear infinite;
+            filter: blur(2px);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        @keyframes rotateHalo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .news-ticker {
+            background: rgba(59, 130, 246, 0.1);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .channel-id-badge {
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            width: 50px; height: 50px;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="nebula-bg"></div>
+
+    <div class="relative z-10 max-w-7xl w-full mx-auto">
+        <!-- Brand Header -->
+        <header class="flex flex-col items-center mb-20">
+            <div class="halo-logo mb-8">
+                <div class="halo-ring"></div>
+                <div class="halo-ring" style="animation-delay: -4s; border-color: #8b5cf6; opacity: 0.5;"></div>
+                <span class="text-white font-black text-2xl tracking-widest drop-shadow-2xl z-10">OSSAMA TV</span>
+            </div>
+            
+            <h1 class="text-7xl font-black text-white mb-2 tracking-tighter reflection">OSSAMA TV</h1>
+            <p class="text-blue-400 font-bold tracking-[0.5em] text-xs mt-4 uppercase">Legendary Streaming Hub</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="legendary-container p-10 md:p-20 rounded-[4rem] overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"></div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+                
+                <script>
+                    const channels = [
+                        { id: '01', name: 'بي إن سبورت 1', url: 'http://stream.mytvplus.net:7002/sport/ch1/ch1_1080.m3u8' },
+                        { id: '02', name: 'بي إن سبورت 2', url: 'http://stream.mytvplus.net:7003/sport/ch2/ch2_1080.m3u8' },
+                        { id: '03', name: 'بي إن سبورت 3', url: 'http://stream.mytvplus.net:7004/sport/ch3/ch3_1080.m3u8' },
+                        { id: '04', name: 'بي إن سبورت 4', url: 'http://stream.mytvplus.net:7005/sport/ch4/ch4_1080.m3u8' },
+                        { id: '05', name: 'بي إن سبورت 5', url: 'http://stream.mytvplus.net:7006/sport/ch5/ch5_1080.m3u8' }
+                    ];
+
+                    document.write(channels.map(ch => `
+                        <a href="${ch.url}" target="_blank" class="legendary-card group p-12 rounded-[2.5rem] flex flex-col items-center justify-center text-center">
+                            <div class="channel-id-badge group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                                ${ch.id}
+                            </div>
+                            <h2 class="text-2xl font-black text-slate-300 group-hover:text-white transition-colors tracking-tight">${ch.name}</h2>
+                            <div class="mt-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase">Online Now</span>
+                            </div>
+                        </a>
+                    `).join(''));
+
+                    // Script for Mouse Tracking Effect
+                    document.addEventListener('mousemove', e => {
+                        const cards = document.querySelectorAll('.legendary-card');
+                        cards.forEach(card => {
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            card.style.setProperty('--mouse-x', `${x}px`);
+                            card.style.setProperty('--mouse-y', `${y}px`);
+                        });
+                    });
+                </script>
+
+            </div>
+        </main>
+
+        <!-- Scrolling Ticker -->
+        <div class="news-ticker">
+            <div class="ticker-content">
+                &bull; تم التطوير من قبل OSSAMA SALAM HADI &bull; تجربة مشاهدة لا مثيل لها مع OSSAMA TV &bull; جميع القنوات تعمل بجودة FULL HD 1080P &bull; تابع أقوى المباريات العالمية حصرياً &bull; OSSAMA TV: THE FUTURE OF SPORTS STREAMING &bull;
+            </div>
+        </div>
+
+        <footer class="mt-24 text-center pb-20">
+            <p class="text-slate-600 text-xs font-bold tracking-widest uppercase">
+                Designed with passion for <span class="text-blue-500">OSSAMA</span> | v5.0 Ultimate
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
