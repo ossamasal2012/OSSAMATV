@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSSAMA TV - Legendary Edition</title>
+    <title>OSSAMA TV - The Ultimate Empire</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.6);
-            --bg-dark: #050505;
+            --bg-dark: #020202;
         }
 
         body {
@@ -18,201 +17,220 @@
             background-color: var(--bg-dark);
             color: white;
             min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: default;
         }
 
-        /* خلفية النيون المتحركة */
         .nebula-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
-            filter: blur(80px);
+                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(30, 64, 175, 0.1) 0%, transparent 40%);
         }
 
-        /* لوحة الزجاج الأسطورية */
-        .legendary-container {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(30px);
+        .category-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+            border-right: 6px solid var(--primary);
+            padding: 15px 25px;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.4rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .channel-card {
+            background: rgba(25, 25, 25, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
-            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 1.25rem;
+            text-align: center;
+            text-decoration: none;
+            color: white;
         }
 
-        /* بطاقة القناة - المستوى الأسطوري */
-        .legendary-card {
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .legendary-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 40%);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .legendary-card:hover::before {
-            opacity: 1;
-        }
-
-        .legendary-card:hover {
-            transform: translateY(-20px) scale(1.05);
+        .channel-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(59, 130, 246, 0.15);
             border-color: var(--primary);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-glow);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
         }
 
-        /* انعكاس سفلي */
-        .reflection {
-            -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(255, 255, 255, 0.1));
-        }
-
-        /* شعار الهالة (Halo Logo) */
-        .halo-logo {
-            width: 180px; height: 180px;
-            position: relative;
+        .logo-container {
+            width: 65px; height: 65px;
+            background: #000;
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 8px;
             display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .halo-ring {
-            position: absolute;
-            width: 100%; height: 100%;
-            border: 2px solid var(--primary);
-            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-            animation: rotateHalo 12s linear infinite;
-            filter: blur(2px);
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-
-        @keyframes rotateHalo {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .logo-container img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain;
         }
 
         .news-ticker {
-            background: rgba(59, 130, 246, 0.1);
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
             position: fixed;
             bottom: 0; left: 0; width: 100%;
-            padding: 10px 0;
-            overflow: hidden;
-            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--primary);
+            padding: 8px 0;
+            z-index: 1000;
         }
 
-        .ticker-content {
+        .ticker-wrap {
             display: inline-block;
-            animation: ticker 30s linear infinite;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--primary);
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
         }
 
         @keyframes ticker {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-
-        .channel-id-badge {
-            background: linear-gradient(to bottom, #1e293b, #0f172a);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            width: 50px; height: 50px;
-            border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-4 md:p-10">
 
     <div class="nebula-bg"></div>
 
-    <div class="relative z-10 max-w-7xl w-full mx-auto">
-        <!-- Brand Header -->
-        <header class="flex flex-col items-center mb-20">
-            <div class="halo-logo mb-8">
-                <div class="halo-ring"></div>
-                <div class="halo-ring" style="animation-delay: -4s; border-color: #8b5cf6; opacity: 0.5;"></div>
-                <span class="text-white font-black text-2xl tracking-widest drop-shadow-2xl z-10">OSSAMA TV</span>
-            </div>
-            
-            <h1 class="text-7xl font-black text-white mb-2 tracking-tighter reflection">OSSAMA TV</h1>
-            <p class="text-blue-400 font-bold tracking-[0.5em] text-xs mt-4 uppercase">Legendary Streaming Hub</p>
+    <div class="max-w-[1600px] mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter">OSSAMA TV</h1>
+            <p class="text-blue-500 font-bold tracking-[0.3em] text-xs mt-3 uppercase">TOTAL EMPIRE EDITION</p>
         </header>
 
-        <!-- Main Content Area -->
-        <main class="legendary-container p-10 md:p-20 rounded-[4rem] overflow-hidden">
-            <!-- Background Decoration -->
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"></div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
-                
-                <script>
-                    const channels = [
-                        { id: '01', name: 'بي إن سبورت 1', url: 'http://stream.mytvplus.net:7002/sport/ch1/ch1_1080.m3u8' },
-                        { id: '02', name: 'بي إن سبورت 2', url: 'http://stream.mytvplus.net:7003/sport/ch2/ch2_1080.m3u8' },
-                        { id: '03', name: 'بي إن سبورت 3', url: 'http://stream.mytvplus.net:7004/sport/ch3/ch3_1080.m3u8' },
-                        { id: '04', name: 'بي إن سبورت 4', url: 'http://stream.mytvplus.net:7005/sport/ch4/ch4_1080.m3u8' },
-                        { id: '05', name: 'بي إن سبورت 5', url: 'http://stream.mytvplus.net:7006/sport/ch5/ch5_1080.m3u8' }
-                    ];
-
-                    document.write(channels.map(ch => `
-                        <a href="${ch.url}" target="_blank" class="legendary-card group p-12 rounded-[2.5rem] flex flex-col items-center justify-center text-center">
-                            <div class="channel-id-badge group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 transition-all duration-500">
-                                ${ch.id}
-                            </div>
-                            <h2 class="text-2xl font-black text-slate-300 group-hover:text-white transition-colors tracking-tight">${ch.name}</h2>
-                            <div class="mt-6 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span>
-                                <span class="text-[10px] font-bold text-slate-500 uppercase">Online Now</span>
-                            </div>
-                        </a>
-                    `).join(''));
-
-                    // Script for Mouse Tracking Effect
-                    document.addEventListener('mousemove', e => {
-                        const cards = document.querySelectorAll('.legendary-card');
-                        cards.forEach(card => {
-                            const rect = card.getBoundingClientRect();
-                            const x = e.clientX - rect.left;
-                            const y = e.clientY - rect.top;
-                            card.style.setProperty('--mouse-x', `${x}px`);
-                            card.style.setProperty('--mouse-y', `${y}px`);
-                        });
-                    });
-                </script>
-
-            </div>
-        </main>
-
-        <!-- Scrolling Ticker -->
-        <div class="news-ticker">
-            <div class="ticker-content">
-                &bull; تم التطوير من قبل OSSAMA SALAM HADI &bull; تجربة مشاهدة لا مثيل لها مع OSSAMA TV &bull; جميع القنوات تعمل بجودة FULL HD 1080P &bull; تابع أقوى المباريات العالمية حصرياً &bull; OSSAMA TV: THE FUTURE OF SPORTS STREAMING &bull;
-            </div>
+        <div id="grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mb-20">
+            <!-- JavaScript will populate this -->
         </div>
 
-        <footer class="mt-24 text-center pb-20">
-            <p class="text-slate-600 text-xs font-bold tracking-widest uppercase">
-                Designed with passion for <span class="text-blue-500">OSSAMA</span> | v5.0 Ultimate
-            </p>
-        </footer>
+        <div class="news-ticker">
+            <div class="ticker-wrap text-blue-400 font-bold text-sm">
+                &bull; تم إضافة كامل باقات MBC وروتانا و beIN SPORTS بنجاح &bull; تم دمج قنوات مصر وليبيا ولبنان وموريتانيا &bull; OSSAMA TV: الإمبراطورية الكاملة للمشاهدة &bull;
+            </div>
+        </div>
     </div>
 
+    <script>
+        const categories = [
+            {
+                title: "باقة beIN SPORTS",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/BeIN_Sports_logo.svg/2560px-BeIN_Sports_logo.svg.png",
+                channels: [
+                    { name: "بي إن سبورت 1", url: "http://stream.mytvplus.net:7002/sport/ch1/ch1_1080.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "بي إن سبورت 2", url: "http://stream.mytvplus.net:7003/sport/ch2/ch2_1080.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BeIN_Sports_2_logo.svg/512px-BeIN_Sports_2_logo.svg.png" },
+                    { name: "بي إن سبورت 3", url: "http://stream.mytvplus.net:7004/sport/ch3/ch3_1080.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/BeIN_Sports_3_logo.svg/512px-BeIN_Sports_3_logo.svg.png" },
+                    { name: "بي إن سبورت 4", url: "http://stream.mytvplus.net:7005/sport/ch4/ch4_1080.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/BeIN_Sports_4_logo.svg/512px-BeIN_Sports_4_logo.svg.png" },
+                    { name: "بي إن سبورت 5", url: "http://stream.mytvplus.net:7006/sport/ch5/ch5_1080.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/BeIN_Sports_5_logo.svg/512px-BeIN_Sports_5_logo.svg.png" }
+                ]
+            },
+            {
+                title: "باقة MBC الكاملة",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/MBC_Group_logo.svg/1024px-MBC_Group_logo.svg.png",
+                channels: [
+                    { name: "MBC 1", url: "https://mbc1-enc.edgenextcdn.net/out/v1/0965e4d7deae49179172426cbfb3bc5e/index.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "MBC 2 جار الصيانة", url: "google.com", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_2_5ae3f15729.svg" },
+                    { name: "MBC 3", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_3_dae34fae7b.svg" },
+                    { name: "MBC 4", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_4_8d4307615e.svg" },
+                    { name: "MBC 5", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_5_cf153622ec.svg" },
+                    { name: "MBC أكشن (صيانة)", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-action/03f269a9042a59d9f584e583e742e883/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_action_33b48024b3.svg" },
+                    { name: "MBC (ماكس(صيانة", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-max/473d06963e695f2d057778b8770ca283/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_max_33d6507438.svg" },
+                    { name: "MBC دراما", url: "https://mbc1-enc.edgenextcdn.net/out/v1/b0b3a0e6750d4408bb86d703d5feffd1/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_drama_a536283ae5.svg" },
+                    { name: "MBC+ دراما", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_drama_1_8592a27973.svg" },
+                    { name: "MBC بوليوود", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_bollywood_d2bef5e158.svg" },
+                    { name: "MBC عراق", url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_iraq_716ec2b8be.svg" }
+                ]
+            },
+            {
+                title: " جاري الصيانة / لاتعمل  ) باقة روتانا الكاملة)",
+                icon: "https://upload.wikimedia.org/wikipedia/ar/2/26/Rotana_Group_Logo.svg",
+                channels: [
+                    { name: "روتانا خليجية", url: "https://bcovlive-a.akamaihd.net/06a0e6f6a7d74f76b975d0b3a0e6e76d/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/khaleejiya.png" },
+                    { name: "روتانا دراما", url: "https://bcovlive-a.akamaihd.net/3d5feffd1b0b3a0e6750d4408bb86d70/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/drama.png" },
+                    { name: "روتانا سينما", url: "https://bcovlive-a.akamaihd.net/9527a892aeaf43019fd9eeb77ad1516e/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/cinema.png" },
+                    { name: "روتانا سينما مصر", url: "https://bcovlive-a.akamaihd.net/7dcf9a209255dd2496903764546eb40d/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/cinemamasr.png" },
+                    { name: "روتانا كلاسيك", url: "https://bcovlive-a.akamaihd.net/0debf5648e584e5fb795c3611c5c0252/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/classical.png" },
+                    { name: "روتانا كوميدي", url: "https://bcovlive-a.akamaihd.net/33b48024b303f269a9042a59d9f584e5/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/comedy.png" },
+                    { name: "روتانا كليب", url: "https://bcovlive-a.akamaihd.net/473d06963e695f2d057778b8770ca283/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/logos/clip.png" },
+                    { name: "روتانا +", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/rotana-plus/master.m3u8", logo: "https://rotana.net/triAssets/themes/TriTheme/images/channels/hd.png" },
+                    { name: "روتنا أفلام +", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/rotana-aflam-plus/master.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Rotana_Aflam_New.png" },
+                    { name: "M+ HD", url: "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/rotana-m-plus/master.m3u8", logo: "https://rotana.net/triAssets/themes/TriTheme/images/channels/m-plus.png" },
+                    { name: "روتانا أمريكا", url: "https://bcovlive-a.akamaihd.net/8d4307615e24f134f1cd63db9346439e/eu-central-1/6057955906001/playlist.m3u8", logo: "https://rotana.net/triAssets/themes/TriTheme/images/channels/america.png" }
+                ]
+            },
+            {
+                title: "باقة مصر",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/2560px-Flag_of_Egypt.svg.png",
+                channels: [
+                    { name: "MBC مصر", url: "https://mbc1-enc.edgenextcdn.net/out/v1/d5036cabf11e45bf9d0db410ca135c18/index.m3u8", logo: "https://mbc-lite-strapi-s3.s3.me-south-1.amazonaws.com/svg_mbc_egypt_9f7d59dcbe.svg" },
+                    { name: "صدى البلد", url: "https://raw.githubusercontent.com/fraudiay79/strm/refs/heads/main/platforms/links/elbaladtv.m3u8", logo: "https://elbaladtv.net/images/Logo.png" }
+                ]
+            },
+            {
+                title: "منوعة + باقة ليبيا",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Libya.svg/2560px-Flag_of_Libya.svg.png",
+                channels: [
+                    { name: "ليبيا الوطنية", url: "https://cdn-globecast.akamaized.net/live/eds/libya_al_watanya/hls_roku/index.m3u8", logo: "https://i.ibb.co/vzZ6yvs/salam.png" },
+                    { name: "ناشيونال جيوغرافيك أبو ظبي", url: "https://admn-live-cdn-lb.starzplayarabia.com/out/v1/admn_tv_enc/national_geo/national_geo_hls_nd/index.m3u8",logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "ماجد", url: "https://admn-live-cdn-lb.starzplayarabia.com/out/v1/admn_tv_enc/majid/majid_hls_nd/index.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "العراقية", url: "https://cdn.catiacast.video/abr/8d2ffb0aba244e8d9101a9488a7daa05/playlist.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "العراقية الاخبارية", url: "https://cdn.catiacast.video/abr/78054972db7708422595bc96c6e024ac/playlist.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "الشرقيه", url: "https://5d94523502c2d.streamlock.net/home/mystream/chunklist.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "الشرقيه الاخبارية", url: "https://5d94523502c2d.streamlock.net/alsharqiyalive/mystream/chunklist.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+                    { name: "UTV Iraq", url: "https://mn-nl.mncdn.com/utviraqi2/64c80359/chunklist.m3u8", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png" },
+
+                ]
+            },
+            {
+                title: "باقة لبنان",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Flag_of_Lebanon.svg/2560px-Flag_of_Lebanon.svg.png",
+                channels: [
+                    { name: "MTV Lebanon", url: "https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8", logo: "https://www.mtv.com.lb/images/header/mtv-logo.svg" },
+                    { name: "المنار", url: "https://edge.fastpublish.me/live/tracks-v1a1/mono.m3u8", logo: "https://almanar.com.lb/framework/assets/images/manar-logo.png" }
+
+                ]
+            }
+        ];
+
+        function initApp() {
+            const container = document.getElementById('grid-container');
+            categories.forEach(cat => {
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.innerHTML = `<span>${cat.title}</span> <img src="${cat.icon}" class="h-8 rounded shadow-sm">`;
+                container.appendChild(header);
+
+                cat.channels.forEach(ch => {
+                    const card = document.createElement('a');
+                    card.href = ch.url;
+                    card.target = "_blank";
+                    card.className = "channel-card";
+                    card.innerHTML = `
+                        <div class="logo-container">
+                            <img src="${ch.logo}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/100x100?text=TV'">
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-200 line-clamp-1">${ch.name}</span>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                            <span class="text-[8px] text-green-400 font-black uppercase tracking-widest">Live HD</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        window.onload = initApp;
+    </script>
 </body>
 </html>
