@@ -1,20 +1,30 @@
 {
   "name": "OSSAMA TV",
   "short_name": "OSSAMA TV",
+  "description": "شاهد قنواتك المفضلة مباشرة عبر OSSAMA TV بجودة عالية",
   "start_url": "/OSSAMATV/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
