@@ -1,4 +1,9 @@
+// sw.js
 self.addEventListener('fetch', (event) => {
-  // هذا السطر يضمن أن التطبيق سيحاول جلب القنوات من الإنترنت أولاً
-  event.respondWith(fetch(event.request));
+    event.respondWith(
+        fetch(event.request).catch(() => {
+            // في حال فشل الاتصال، لا يفعل شيئاً أو يمكنك توجيهه لصفحة أوفلاين
+            return caches.match(event.request);
+        })
+    );
 });
