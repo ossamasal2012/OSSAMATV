@@ -1,6 +1,6 @@
 <html lang="ar" dir="rtl">
 <head> 
-<link rel="manifest" href="/manifest.json">   
+<link rel="manifest" href="./manifest.json">   
 <link rel="icon" sizes="192x192" href="https://i.ibb.co/zh1ky6SN/logo2.png">
 <link rel="icon" sizes="512x512" href="https://i.ibb.co/zh1ky6SN/logo2.png">
 
@@ -358,14 +358,14 @@ function toggleMenu() {
             });
         }
 
+// نهاية دالة initApp
         window.onload = initApp;
-      <script>
-  if ('serviceWorker' in navigator) {
-    // استخدام './sw.js' بدلاً من المسار الكامل يضمن العثور على الملف داخل مجلد المشروع
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log("Service Worker Registered"))
-      .catch((err) => console.log("Service Worker Failed", err));
-  }
-</script>
-</body>
+
+        // تسجيل الـ Service Worker بشكل منفصل وبدون وسم script إضافي بالداخل
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log("Service Worker Registered"))
+                .catch((err) => console.log("Service Worker Failed", err));
+        }
+    </script> </body>
 </html>
