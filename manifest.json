@@ -1,22 +1,10 @@
 {
-  "name": "OSSAMA TV",
-  "short_name": "OSSAMA TV",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#1e293b",
   "icons": [
     {
       "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
-      "sizes": "any",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
-      "sizes": "any",
-      "type": "image/png",
-      "purpose": "maskable"
+      "sizes": "512x512", // Make sure this matches the actual image dimensions
+      "type": "image/png"
     }
+    // ... other icons
   ]
 }
