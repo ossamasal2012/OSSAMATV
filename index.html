@@ -1,10 +1,10 @@
-
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSSAMA TV - The Ultimate Empire</title>
+    
+    <link rel="icon" type="image/png" href="logo1.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -20,6 +20,60 @@
             min-height: 100vh;
         }
 
+        /* --- تنسيقات زر الإعدادات والقائمة --- */
+        .settings-container {
+            position: fixed;
+            top: 20px;
+            right: 20px; /* في الزاوية العليا اليمنى */
+            z-index: 2000; /* أعلى من كل العناصر */
+        }
+
+        .settings-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            transition: 0.3s;
+        }
+
+        .settings-btn:hover {
+            transform: scale(1.05);
+            background-color: #2563eb;
+        }
+
+        .links-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: #1a1a1a;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            border: 1px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .links-menu a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .links-menu a:hover {
+            background-color: var(--primary);
+        }
+
+        .show { display: block; } /* كلاس الإظهار */
+
         .nebula-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -28,7 +82,12 @@
                 radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 90% 90%, rgba(30, 64, 175, 0.1) 0%, transparent 40%);
         }
-
+        .main-logo {
+            width: 350px; /* يمكنك التحكم في حجم الشعار من هنا */
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+        }
         .category-header {
             grid-column: 1 / -1;
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
@@ -89,27 +148,37 @@
             z-index: 1000;
         }
 
-        .ticker-wrap {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 40s linear infinite;
+.ticker-wrap {
+    display: flex; /* تحويل الحاوية إلى نظام المرونة */
+    align-items: center; /* محاذاة الصورة والنص عمودياً */
+    gap: 15px; /* إضافة مسافة بين الصورة والنص */
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
         }
 
         @keyframes ticker {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
+    <div class="settings-container">
+        <button onclick="toggleMenu()" class="settings-btn"> روابط مشغلات LTS للكمبيوتر *(قم بتنزيل واحد فقط ) ⚙️</button>
+        <div id="linksMenu" class="links-menu">
+            <a href="https://chromewebstore.google.com/detail/videoplayer-mpdm3u8iptvep/opmeopcambhfimffbomjgemehjkbbmji?hl=ar" target="_blank">المشغل: رقم 1</a>
+            <a href="https://chromewebstore.google.com/detail/hls-player-m3u8-streaming/eakdijdofmnclopcffkkgmndadhbjgka?hl=ar" target="_blank">المشغل: رقم 2</a>
+            <a href="https://chromewebstore.google.com/detail/native-mpeg-dash-+-hls-pl/cjfbmleiaobegagekpmlhmaadepdeedn?hl=ar" target="_blank">المشغل: رقم 3</a>
+        </div>
+    </div>
+
     <div class="nebula-bg"></div>
 
     <div class="max-w-[1600px] mx-auto">
-        <header class="text-center mb-12">
-            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter">OSSAMA TV</h1>
-            <p class="text-blue-500 font-bold tracking-[0.3em] text-xs mt-3 uppercase">TOTAL EMPIRE EDITION</p>
-        </header>
+        
+        <header class="flex flex-col items-center text-center mb-12">
+            <img src="logo1.png" class="main-logo" alt="OSSAMA TV Logo">
 
         <div id="grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mb-20">
             <!-- JavaScript will populate this -->
@@ -117,11 +186,29 @@
 
         <div class="news-ticker">
             <div class="ticker-wrap text-blue-400 font-bold text-sm">
-                &bull;  <p style="color: red;">مـلاحظة مـــهمـــة //  يـرجى تحـــميل مـــشـــغــل M3U8  .......................................................................................  مـلاحظة مـهمة //  يــرجــى تحـميل مـشغـل M3U8   ..........................................................................................  مـلاحظة مـهمـة //  يــرجـــى تحــميل مــشـغل M3U8 </p>
+                &bull;  <p style="color: red;">  مـلاحظة مـــهمـــة للكمبيوتر //  يـرجى تحـــميل مـــشـــغــل LTS من </p>
+                <img src="logo.png" class="ticker-image" alt="My Logo">
             </div>
         </div>
     </div>
 
+
+    <script>
+function toggleMenu() {
+            document.getElementById("linksMenu").classList.toggle("show");
+        }
+
+        // إغلاق القائمة عند الضغط خارجها
+        window.onclick = function(event) {
+            if (!event.target.matches('.settings-btn')) {
+                var menu = document.getElementById("linksMenu");
+                if (menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                }
+            }
+        }
+    </script>
+    
     <script>
         const categories = [
             {
