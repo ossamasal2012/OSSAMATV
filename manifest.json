@@ -1,8 +1,10 @@
 {
   "name": "OSSAMA TV",
-  "OSSAMA TV": "موقعي",
-  "start_url": ".",
+  "short_name": "OSSAMA TV",
+  "start_url": "/OSSAMATV/",
   "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "https://i.ibb.co/zh1ky6SN/logo2.png",
