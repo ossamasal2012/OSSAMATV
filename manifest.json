@@ -8,13 +8,13 @@
   "icons": [
     {
       "src": "https://i.ibb.co/1tQhTYs9/Gemini-Generated-Image-y6iu32y6iu32y6iu-1.png",
-      "sizes": "180×180",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "https://i.ibb.co/1tQhTYs9/Gemini-Generated-Image-y6iu32y6iu32y6iu-1.png",
-      "sizes": "180×180",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "maskable"
     }
