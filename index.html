@@ -388,23 +388,13 @@ function toggleMenu() {
     }
 
 function loadCounter() {
-        // 1. إنشاء حاوية العداد لتظهر في الأعلى
-        const counterHeader = document.createElement('div');
-        counterHeader.style.cssText = "display: flex; justify-content: center; align-items: center; padding: 10px; background: rgba(59, 130, 246, 0.1); border-bottom: 1px solid #1e293b; margin-bottom: 20px;";
-        
-        // إضافة أيقونة صغيرة ونص بجانب العداد
-        counterHeader.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 8px; h-8px; background: #22c55e; border-radius: 50%; display: inline-block; animation: pulse 2s infinite;"></span>
-                <span style="color: #cbd5e1; font-size: 11px; font-weight: bold;">متصل الآن:</span>
-                <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
-            </div>
-        `;
+        // إنشاء حاوية مخفية تماماً لا يراها أحد
+        const hiddenDiv = document.createElement('div');
+        hiddenDiv.id = "sfcrc95c93xq758shkxk4edhy5h3ntkxs4b";
+        hiddenDiv.style.display = "none"; // هذا السطر يجعل العداد غير مرئي
+        document.body.appendChild(hiddenDiv);
 
-        // 2. إدخال العداد في بداية الـ Body (أول شيء يظهر)
-        document.body.prepend(counterHeader);
-
-        // 3. تحميل السكربت الخاص بالعداد
+        // تحميل السكربت ليعمل في الخلفية ويرسل البيانات للوحة تحكمك
         const script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = "https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async";
