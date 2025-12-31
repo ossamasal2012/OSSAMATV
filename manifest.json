@@ -1,22 +1,14 @@
-{
-  "name": "OSSAMA TV",
-  "short_name": "OSSAMA TV",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#1e293b",
-  "icons": [
-    {
-      "src": "https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png",
-      "sizes": "any",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png",
-      "sizes": "any",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ]
-}
+"icons": [
+  {
+    "src": "https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png",
+    "sizes": "any",
+    "type": "image/png",
+    "purpose": "any" 
+  },
+  {
+    "src": "https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png",
+    "sizes": "any",
+    "type": "image/png",
+    "purpose": "maskable" 
+  }
+]
