@@ -334,51 +334,57 @@ function toggleMenu() {
         ];
 <script>
         function initApp() {
-            const container = document.getElementById('grid-container');
-            // تأكد أن مصفوفة categories موجودة قبل هذا السطر في ملفك
-            if (!container || typeof categories === 'undefined') return;
+            // نستخدم try-catch لمنع أي خطأ خارجي من إيقاف عمل القنوات
+            try {
+                const container = document.getElementById('grid-container');
+                if (!container) return;
 
-            categories.forEach(cat => {
-                const header = document.createElement('div');
-                header.className = 'category-header';
-                header.innerHTML = `<span>${cat.title}</span> <img src="${cat.icon}" class="h-8 rounded shadow-sm">`;
-                container.appendChild(header);
+                // التحقق من وجود البيانات
+                if (typeof categories !== 'undefined') {
+                    container.innerHTML = ""; 
+                    categories.forEach(cat => {
+                        const header = document.createElement('div');
+                        header.className = 'category-header';
+                        header.innerHTML = `<span>${cat.title}</span> <img src="${cat.icon}" class="h-8 rounded shadow-sm">`;
+                        container.appendChild(header);
 
-                cat.channels.forEach(ch => {
-                    const card = document.createElement('a');
-                    card.href = ch.url;
-                    card.target = "_blank";
-                    card.className = "channel-card";
-                    card.innerHTML = `
-                        <div class="logo-container">
-                            <img src="${ch.logo}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/100x100?text=TV'">
-                        </div>
-                        <span class="text-[10px] font-bold text-slate-200 line-clamp-1">${ch.name}</span>
-                        <div class="flex items-center gap-1 mt-1">
-                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                            <span class="text-[8px] text-green-400 font-black uppercase tracking-widest">Live HD</span>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            });
+                        cat.channels.forEach(ch => {
+                            const card = document.createElement('a');
+                            card.href = ch.url;
+                            card.target = "_blank";
+                            card.className = "channel-card";
+                            card.innerHTML = `
+                                <div class="logo-container">
+                                    <img src="${ch.logo}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/100x100?text=TV'">
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-200 line-clamp-1">${ch.name}</span>
+                                <div class="flex items-center gap-1 mt-1">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span class="text-[8px] text-green-400 font-black uppercase tracking-widest">Live HD</span>
+                                </div>
+                            `;
+                            container.appendChild(card);
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading channels:", error);
+            }
         }
 
-        window.onload = initApp;
+        // تشغيل القنوات فوراً عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', initApp);
 
+        // تسجيل الـ Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log("Service Worker Registered"))
-                .catch((err) => console.log("Service Worker Failed", err));
+            navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
         }
     </script>
 
-    <div style="text-align: center; padding: 20px; background: #020202; margin-top: 40px; border-top: 1px solid #1e293b;">
-        <p style="color: #3b82f6; font-size: 11px; margin-bottom: 8px;">إحصائيات الزوار</p>
-        
+    <footer style="margin-top: 50px; padding: 20px; text-align: center; border-top: 1px solid #1e293b;">
         <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
         <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async" async></script>
-    </div>
+    </footer>
 
 </body>
 </html>
