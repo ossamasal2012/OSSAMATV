@@ -332,9 +332,23 @@ function toggleMenu() {
                 ]
             }
         ];
+<div style="display: flex; flex-direction: column; align-items: center; padding: 20px; background-color: #020202; border-top: 1px solid #1e293b; margin-top: 30px;">
+        <h3 style="color: #3b82f6; font-size: 12px; margin-bottom: 10px; font-family: 'Cairo', sans-serif;">إحصائيات الزوار</h3>
+        
+        <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
+        <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async" async></script>
+        <noscript>
+            <a href="https://www.freecounterstat.com" title="free hit counter">
+                <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=rc95c93xq758shkxk4edhy5h3ntkxs4b" border="0" title="free hit counter" alt="free hit counter">
+            </a>
+        </noscript>
+    </div>
 
+    <script>
         function initApp() {
             const container = document.getElementById('grid-container');
+            if (!container) return; // تأمين إضافي
+
             categories.forEach(cat => {
                 const header = document.createElement('div');
                 header.className = 'category-header';
@@ -361,14 +375,13 @@ function toggleMenu() {
             });
         }
 
-// نهاية دالة initApp
         window.onload = initApp;
 
-        // تسجيل الـ Service Worker بشكل منفصل وبدون وسم script إضافي بالداخل
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
                 .then(() => console.log("Service Worker Registered"))
                 .catch((err) => console.log("Service Worker Failed", err));
         }
-    </script> </body>
+    </script>
+</body>
 </html>
