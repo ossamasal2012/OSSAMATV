@@ -45,6 +45,12 @@
             min-height: 100vh;
         }
 
+        @keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
         /* --- تنسيقات زر الإعدادات والقائمة --- */
         .settings-container {
             position: fixed;
@@ -381,12 +387,24 @@ function toggleMenu() {
         loadCounter();
     }
 
-    function loadCounter() {
-        const footer = document.createElement('footer');
-        footer.style.cssText = "margin-top: 50px; padding: 20px; text-align: center; border-top: 1px solid #1e293b;";
-        footer.innerHTML = '<div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>';
-        document.body.appendChild(footer);
+function loadCounter() {
+        // 1. إنشاء حاوية العداد لتظهر في الأعلى
+        const counterHeader = document.createElement('div');
+        counterHeader.style.cssText = "display: flex; justify-content: center; align-items: center; padding: 10px; background: rgba(59, 130, 246, 0.1); border-bottom: 1px solid #1e293b; margin-bottom: 20px;";
+        
+        // إضافة أيقونة صغيرة ونص بجانب العداد
+        counterHeader.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; h-8px; background: #22c55e; border-radius: 50%; display: inline-block; animation: pulse 2s infinite;"></span>
+                <span style="color: #cbd5e1; font-size: 11px; font-weight: bold;">متصل الآن:</span>
+                <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
+            </div>
+        `;
 
+        // 2. إدخال العداد في بداية الـ Body (أول شيء يظهر)
+        document.body.prepend(counterHeader);
+
+        // 3. تحميل السكربت الخاص بالعداد
         const script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = "https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async";
