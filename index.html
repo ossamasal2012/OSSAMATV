@@ -332,27 +332,12 @@ function toggleMenu() {
                 ]
             }
         ];
-<div id="counter-section" style="display: flex; flex-direction: column; align-items: center; padding: 20px; background-color: #020202; margin-top: 50px; clear: both;">
-    <h3 style="color: #3b82f6; font-size: 12px; margin-bottom: 10px; font-family: 'Cairo', sans-serif;">إحصائيات OSSAMA TV</h3>
-    
-    <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
-    <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async" async></script>
-    <noscript>
-        <a href="https://www.freecounterstat.com" title="free hit counter">
-            <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=rc95c93xq758shkxk4edhy5h3ntkxs4b" border="0" title="free hit counter" alt="free hit counter">
-        </a>
-    </noscript>
-</div>
-
 <script>
-    // هذه الدالة هي المسؤولة عن إظهار القنوات
-    function initApp() {
-        const container = document.getElementById('grid-container');
-        
-        // نتحقق أولاً أن الحاوية موجودة وأن البيانات (categories) محملة
-        if (container && typeof categories !== 'undefined') {
-            container.innerHTML = ""; // مسح أي محتوى قديم
-            
+        function initApp() {
+            const container = document.getElementById('grid-container');
+            // تأكد أن مصفوفة categories موجودة قبل هذا السطر في ملفك
+            if (!container || typeof categories === 'undefined') return;
+
             categories.forEach(cat => {
                 const header = document.createElement('div');
                 header.className = 'category-header';
@@ -378,17 +363,22 @@ function toggleMenu() {
                 });
             });
         }
-    }
 
-    // تشغيل الدالة عند تحميل الصفحة
-    window.addEventListener('load', initApp);
+        window.onload = initApp;
 
-    // تسجيل الـ Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-            .then(() => console.log("Service Worker Registered"))
-            .catch((err) => console.log("Service Worker Failed", err));
-    }
-</script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log("Service Worker Registered"))
+                .catch((err) => console.log("Service Worker Failed", err));
+        }
+    </script>
+
+    <div style="text-align: center; padding: 20px; background: #020202; margin-top: 40px; border-top: 1px solid #1e293b;">
+        <p style="color: #3b82f6; font-size: 11px; margin-bottom: 8px;">إحصائيات الزوار</p>
+        
+        <div id="sfcrc95c93xq758shkxk4edhy5h3ntkxs4b"></div>
+        <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async" async></script>
+    </div>
+
 </body>
 </html>
