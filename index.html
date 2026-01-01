@@ -357,7 +357,35 @@ function toggleContact() {
     document.getElementById("contactBox").classList.toggle("show");
 }
 
+
 // كل النصوص حسب اللغة
+const translations = {
+    ar: {
+        contactBtn: "(للاستفسار والتواصل) 🌐",
+        emailLabel: "📧 الإيميل:",
+        tikTokLabel: "📱 تيك توك:",
+        linksBtn: "روابط مشغلات LTS لتشغيل القنوات للكمبيوتر *(قم بتنزيل واحد فقط ) ⚙️",
+        tickerNote: "مـلاحظة مـــهمـــة للكمبيوتر // يـرجى تحـــميل مـــشـــغــل LTS من"
+    },
+    en: {
+        contactBtn: "(For inquiries and communication) 🌐",
+        emailLabel: "📧 Email:",
+        tikTokLabel: "📱 TikTok:",
+        linksBtn: "LTS players links to run channels on PC *(Download only one) ⚙️",
+        tickerNote: "Important note for PC // Please download LTS player from"
+    }
+};
+</script>
+
+<!-- زر الترجمة -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
