@@ -375,7 +375,19 @@ const translations = {
         tickerNote: "Important note for PC // Please download LTS player from"
     }
 };
+   <!-- زر مترجمGoogle Translate -->
+<div id="google_translate_element" style="position:fixed; top:10px; right:10px; z-index:3000;"></div>
 
+<body class="p-4 md:p-10">
+
+<!-- زر الترجمة -->
+<div id="google_translate_element" style="position:fixed; top:10px; left:10px; z-index:9999; background:white; padding:5px; border-radius:5px;"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
         const categories = [
             {
                 title: "باقة beIN SPORTS <span style='color: red; font-weight: bold; margin-left: 5px;'>(تعمل فقط عند وجود أي مباراة أو حدث مهم)</span>",
