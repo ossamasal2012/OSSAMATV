@@ -278,7 +278,7 @@
         display: block; /* إظهار الأخضر */
     }
 }
-        /* الهاتف فقط */
+/* الهاتف فقط */
 @media (max-width: 640px) {
     .contact-container {
         position: fixed;
@@ -288,12 +288,7 @@
         z-index: 3000;
     }
 }
-        @media (max-width: 640px) {
-    body {
-        padding-top: 80px; /* مساحة تمنع تغطية القنوات */
-    }
-}
-
+        /* الهاتف فقط */
 
         
     </style>
@@ -342,8 +337,6 @@
                 <img src="logo.png" class="ticker-image" alt="My Logo">
             </div>
         </div>
-    </div>
-
 
     <script>
 function toggleMenu() {
@@ -363,26 +356,7 @@ function toggleMenu() {
 function toggleContact() {
     document.getElementById("contactBox").classList.toggle("show");
 }
-</script>
-    
-</body>
-</html>
 
-<script>
-function adjustBodyPadding() {
-    if (window.innerWidth <= 640) {
-        const contactBtn = document.querySelector('.contact-container');
-        if (contactBtn) {
-            const height = contactBtn.offsetHeight;
-            document.body.style.paddingTop = (height + 15) + 'px';
-        }
-    } else {
-        document.body.style.paddingTop = '0px';
-    }
-}
-
-window.addEventListener('load', adjustBodyPadding);
-window.addEventListener('resize', adjustBodyPadding);
 </script>
     
     
