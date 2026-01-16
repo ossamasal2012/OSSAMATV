@@ -23,376 +23,161 @@
     <meta itemprop="image" content="https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDS0WVVCGM"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DDS0WVVCGM');
-    </script> 
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        .contact-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 2000;
-}
-
-.contact-btn {
-    background: #22c55e;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.contact-btn:hover {
-    transform: scale(1.05);
-    background: #16a34a;
-}
-
-.contact-box {
-    display: none;
-    margin-top: 10px;
-    background: #111;
-    border: 1px solid #22c55e;
-    border-radius: 10px;
-    padding: 12px;
-    min-width: 230px;
-}
-
-.contact-box a {
-    color: #22c55e;
-    font-weight: bold;
-    display: block;
-    margin-top: 5px;
-}
-
-.contact-box.show {
-    display: block;
-}
-
-        
-       /* أضف تنسيقات الـ CSS الخاصة بك هنا */
         :root {
-            --primary: #3b82f6;
-            --bg-dark: #020202;
+            --netflix-black: #050505;
+            --royal-gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.6);
+            --gold-gradient: linear-gradient(145deg, #d4af37, #f3cf65);
         }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--netflix-black);
             color: white;
-            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
         }
 
-        @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-
-        /* --- تنسيقات زر الإعدادات والقائمة --- */
-        .settings-container {
+        /* شريط التنقل */
+        .nav-bar {
             position: fixed;
-            top: 20px;
-            right: 20px; /* في الزاوية العليا اليمنى */
-            z-index: 2000; /* أعلى من كل العناصر */
+            top: 0; width: 100%; z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
+            transition: 0.4s; padding: 12px 4%;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .settings-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-            transition: 0.3s;
+        /* الهيرو */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(to top, var(--netflix-black) 0%, transparent 60%),
+                        linear-gradient(to right, rgba(0,0,0,0.9) 20%, transparent 100%), 
+                        url('https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; padding: 0 4%;
         }
 
-        .settings-btn:hover {
-            transform: scale(1.05);
-            background-color: #2563eb;
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 3.5rem); font-weight: 900;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
         }
 
-        .links-menu {
-            display: none;
-            position: absolute;
-            top: 50px;
-            right: 0;
-            background: #1a1a1a;
-            min-width: 220px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border-radius: 10px;
-            border: 1px solid var(--primary);
-            overflow: hidden;
+        /* حاوية الأقسام */
+        .category-row { padding: 30px 4%; }
+        .category-title {
+            font-size: 1.4rem; font-weight: 900; margin-bottom: 25px;
+            display: flex; align-items: center; gap: 12px; color: #fff;
+            border-right: 4px solid var(--royal-gold); padding-right: 15px;
         }
 
-        .links-menu a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: 0.2s;
-            font-size: 0.9rem;
+        /* نظام الشبكة المرن */
+        .channels-grid {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-start;
         }
 
-        .links-menu a:hover {
-            background-color: var(--primary);
-        }
-
-        .show { display: block; } /* كلاس الإظهار */
-
-        .nebula-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(30, 64, 175, 0.1) 0%, transparent 40%);
-        }
-        .main-logo {
-            width: 350px; /* يمكنك التحكم في حجم الشعار من هنا */
-            height: auto;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
-        }
-        .category-header {
-            grid-column: 1 / -1;
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
-            border-right: 6px solid var(--primary);
-            padding: 15px 25px;
-            margin: 2rem 0 1rem 0;
-            font-size: 1.4rem;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 0 15px 15px 0;
-        }
-
-        .channel-card {
-            background: rgba(25, 25, 25, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            border-radius: 1.25rem;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-
-        .channel-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(59, 130, 246, 0.15);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-
-        .logo-container {
-            width: 65px; height: 65px;
-            background: #000;
+        /* الكارت الملكي */
+        .netflix-card {
+            flex: 0 0 calc(16.66% - 17px);
+            min-width: 160px;
+            aspect-ratio: 16/10;
+            background: linear-gradient(145deg, #151515, #050505);
             border-radius: 12px;
-            padding: 6px;
-            margin-bottom: 8px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .logo-container img {
-            max-width: 100%; max-height: 100%;
-            object-fit: contain;
+        @media (max-width: 1024px) { .netflix-card { flex: 0 0 calc(25% - 15px); } }
+        @media (max-width: 768px) { .netflix-card { flex: 0 0 calc(50% - 10px); min-width: 140px; } }
+
+        .netflix-card:hover {
+            transform: scale(1.08) translateY(-5px);
+            border-color: var(--royal-gold);
+            z-index: 50;
+            box-shadow: 0 0 25px var(--gold-glow);
         }
 
-        .news-ticker {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--primary);
-            padding: 8px 0;
-            z-index: 1000;
+        .netflix-card img {
+            width: 100%; height: 100%; object-fit: contain; padding: 32px;
+            transition: all 0.4s ease;
+            filter: grayscale(0.2);
         }
 
-.ticker-wrap {
-    display: flex; /* تحويل الحاوية إلى نظام المرونة */
-    align-items: center; /* محاذاة الصورة والنص عمودياً */
-    gap: 15px; /* إضافة مسافة بين الصورة والنص */
-    white-space: nowrap;
-    animation: ticker 40s linear infinite;
+        .netflix-card:hover img {
+            filter: grayscale(0) drop-shadow(0 0 12px var(--royal-gold));
+            transform: scale(1.1);
         }
 
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+        .crown-icon {
+            position: absolute; top: 8px; right: 8px; z-index: 20;
+            font-size: 0.9rem; filter: drop-shadow(0 0 5px gold);
         }
-        /* ترتيب الأزرار على الهاتف فقط */
-@media (max-width: 640px) {
 
-    .settings-container {
-        top: 10px;
-        right: 50%;
-        transform: translateX(50%);
-    }
+        .card-overlay {
+            position: absolute; bottom: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9) 80%);
+            padding: 8px 0; text-align: center;
+        }
 
-    .contact-container {
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+        .channel-name { font-size: 0.75rem; font-weight: 700; color: #f0f0f0; }
 
-    .settings-btn,
-    .contact-btn {
-        width: 90vw;
-        text-align: center;
-    }
-}
-.contact-container {
-    margin-top: 1px; /* حركه لتحت */
-}
+        /* تعديل النقطة المضيئة: ضوء ثابت دون انطفاء */
+        .live-tag {
+            font-size: 7px; color: var(--royal-gold); font-weight: 900;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
+            margin-top: 2px; letter-spacing: 1px;
+        }
 
-/* الهاتف */
-@media (max-width: 640px) {
-    .settings-container {
-        display: none; /* إخفاء زر المشغلات (الأزرق) */
-    }
-}
+        .live-dot { 
+            width: 6px; 
+            height: 6px; 
+            background: var(--royal-gold); 
+            border-radius: 50%; 
+            /* توهج ثابت دون انطفاء */
+            box-shadow: 0 0 8px 1px var(--royal-gold); 
+        }
 
-/* الكمبيوتر */
-@media (min-width: 641px) {
-    .settings-container {
-        display: block; /* إظهار الأزرق */
-    }
-    .contact-container {
-        display: block; /* إظهار الأخضر */
-    }
-}
-/* الهاتف فقط */
-@media (max-width: 640px) {
-    .contact-container {
-        position: fixed;
-        top: 10px;          /* أعلى الصفحة */
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 3000;
-    }
-}
-        /* الهاتف فقط */
-
-        
+        /* مودال التواصل */
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #0a0a0a; border: 1px solid var(--royal-gold); padding: 30px; border-radius: 20px; z-index: 3000; width: 320px; text-align: center; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; backdrop-filter: blur(5px); }
     </style>
 </head>
-<body class="p-4 md:p-10">
-<h1 style="display:none;">OSSAMA TV - أسامة تي في  - بث مباشر وقنوات ترفيهية</h1>  
+<body>
 
-
-    <!-- زر التواصل -->
-<div class="contact-container">
-    <button onclick="toggleContact()" class="contact-btn">(For inquiries and communication) للاستفسار والتواصل 🌐</button>
-
-    <div id="contactBox" class="contact-box">
-        <p> 📧 (Email) الإيميل:</p>
-        <a href="mailto:ossamasal2012@gmail.com">ossamasal2012@gmail.com</a>
-
-        <p class="mt-3"> 📱 (TIK TOK) تيك توك:</p>
-        <a href="https://www.tiktok.com/@ossama_salam" target="_blank">@ossama_salam</a>
-    </div>
-</div>
-
-
-    <div class="settings-container">
-        <button onclick="toggleMenu()" class="settings-btn"> روابط مشغلات LTS لتشغيل القنوات  للكمبيوتر *(قم بتنزيل واحد فقط ) ⚙️</button>
-        <div id="linksMenu" class="links-menu">
-            <a href="https://chromewebstore.google.com/detail/videoplayer-mpdm3u8iptvep/opmeopcambhfimffbomjgemehjkbbmji?hl=ar" target="_blank">المشغل: رقم 1</a>
-            <a href="https://chromewebstore.google.com/detail/hls-player-m3u8-streaming/eakdijdofmnclopcffkkgmndadhbjgka?hl=ar" target="_blank">المشغل: رقم 2</a>
-            <a href="https://chromewebstore.google.com/detail/native-mpeg-dash-+-hls-pl/cjfbmleiaobegagekpmlhmaadepdeedn?hl=ar" target="_blank">المشغل: رقم 3</a>
+    <nav class="nav-bar" id="navbar">
+        <img src="https://i.ibb.co/fYkRx1fB/Gemini-Generated-Image-ekxxfoekxxfoekxx.png" class="h-10" alt="Logo">
+        <div class="flex gap-4">
+            <button onclick="toggleMenu()" class="text-[10px] text-yellow-500 font-bold px-3 py-1.5 rounded-full border border-yellow-500/30">⚙️ مشغلات LTS</button>
+            <button onclick="toggleContact()" class="bg-red-600 px-5 py-2 rounded-full text-[10px] font-black">اتصل بنا</button>
         </div>
-    </div>
-
-    <div class="nebula-bg"></div>
-
-    <div class="max-w-[1600px] mx-auto">
         
-        <header class="flex flex-col items-center text-center mb-12">
-            <img src="logo_.png" class="main-logo" alt="OSSAMA TV Logo">
-
-        <div id="grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mb-20">
-            <!-- JavaScript will populate this -->
+        <div id="linksMenu" class="hidden absolute top-16 left-4 bg-black/95 border border-royal-gold/50 rounded-xl p-3 z-[2000]">
+            <a href="https://chromewebstore.google.com/detail/videoplayer-mpdm3u8iptvep/opmeopcambhfimffbomjgemehjkbbmji" target="_blank" class="block p-2 text-xs text-gray-300 hover:text-yellow-500">📥 مشغل رقم 1</a>
+            <a href="https://chromewebstore.google.com/detail/hls-player-m3u8-streaming/eakdijdofmnclopcffkkgmndadhbjgka" target="_blank" class="block p-2 text-xs text-gray-300 hover:text-yellow-500 border-t border-white/5">📥 مشغل رقم 2</a>
         </div>
+    </nav>
 
-        <div class="news-ticker">
-            <div class="ticker-wrap text-blue-400 font-bold text-sm">
-                &bull;  <p style="color: red;">  مـلاحظة مـــهمـــة للكمبيوتر //  يـرجى تحـــميل مـــشـــغــل LTS من </p>
-                <img src="logo.png" class="ticker-image" alt="My Logo">
-            </div>
-        </div>
+    <section class="hero">
+        <h1 class="hero-title">OSSAMA TV VIP</h1>
+        <p class="text-sm text-gray-400 mt-3 max-w-sm border-r-2 border-red-600 pr-4">تجربة مشاهدة ملكية ثابتة.</p>
+    </section>
 
-    <script>
-function toggleMenu() {
-            document.getElementById("linksMenu").classList.toggle("show");
-        }
+    <div id="main-content"></div>
 
-        // إغلاق القائمة عند الضغط خارجها
-        window.onclick = function(event) {
-            if (!event.target.matches('.settings-btn')) {
-                var menu = document.getElementById("linksMenu");
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                }
-            }
-        }
+    <div id="modalOverlay" class="overlay" onclick="toggleContact()"></div>
+    <div id="contactBox" class="modal">
+        <h2 class="text-yellow-500 font-black mb-4 text-sm tracking-widest">إدارة أسامة تي في</h2>
+        <p class="text-[11px] text-gray-300">📧 ossamasal2012@gmail.com</p>
+        <button onclick="toggleContact()" class="mt-4 text-red-500 text-xs font-bold">إغلاق</button>
+    </div>
 
-function toggleContact() {
-    document.getElementById("contactBox").classList.toggle("show");
-}
-
-
-// كل النصوص حسب اللغة
-const translations = {
-    ar: {
-        contactBtn: "(للاستفسار والتواصل) 🌐",
-        emailLabel: "📧 الإيميل:",
-        tikTokLabel: "📱 تيك توك:",
-        linksBtn: "روابط مشغلات LTS لتشغيل القنوات للكمبيوتر *(قم بتنزيل واحد فقط ) ⚙️",
-        tickerNote: "مـلاحظة مـــهمـــة للكمبيوتر // يـرجى تحـــميل مـــشـــغــل LTS من"
-    },
-    en: {
-        contactBtn: "(For inquiries and communication) 🌐",
-        emailLabel: "📧 Email:",
-        tikTokLabel: "📱 TikTok:",
-        linksBtn: "LTS players links to run channels on PC *(Download only one) ⚙️",
-        tickerNote: "Important note for PC // Please download LTS player from"
-    }
-};
-</script>
-
-<!-- زر الترجمة -->
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
-<script type="text/javascript" 
-src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            
-            
     <script>
         const categories = [
             {
@@ -490,93 +275,39 @@ src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit
                 ]
             }
         ];
-    function openModal() {
-    document.getElementById("contactModal").style.display = "block";
-}
 
-function closeModal() {
-    document.getElementById("contactModal").style.display = "none";
-}
-
-// إغلاق النافذة عند الضغط خارجها
-window.onclick = function(event) {
-    let modal = document.getElementById("contactModal");
-    let menu = document.getElementById("linksMenu");
-    
-    if (event.target == modal) {
-        closeModal();
-    }
-    
-    if (!event.target.matches('.settings-btn')) {
-        if (menu && menu.classList.contains('show')) {
-            menu.classList.remove('show');
-        }
-    }
-}    
-    
-    function loadOssamaApp() {
-        console.log("App started..."); // للتأكد أن الدالة تعمل
-        const container = document.getElementById('grid-container');
-        
-        if (!container) {
-            console.error("Container 'grid-container' not found!");
-            return;
-        }
-
-        // محاولة تشغيل القنوات مع فحص الأخطاء
-        try {
-            if (typeof categories !== 'undefined' && Array.isArray(categories)) {
-                container.innerHTML = ""; 
-                categories.forEach((cat, index) => {
-                    const header = document.createElement('div');
-                    header.className = 'category-header';
-                    header.innerHTML = `<span>${cat.title}</span> <img src="${cat.icon}" class="h-8 rounded shadow-sm">`;
-                    container.appendChild(header);
-
-                    cat.channels.forEach(ch => {
-                        const card = document.createElement('a');
-                        card.href = ch.url;
-                        card.target = "_blank";
-                        card.className = "channel-card";
-                        card.innerHTML = `
-                            <div class="logo-container">
-                                <img src="${ch.logo}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/100x100?text=TV'">
+        function renderUI() {
+            const container = document.getElementById('main-content');
+            container.innerHTML = "";
+            categories.forEach(cat => {
+                const row = document.createElement('div');
+                row.className = 'category-row';
+                let channelsHTML = "";
+                cat.channels.forEach(ch => {
+                    channelsHTML += `
+                        <a href="${ch.url}" target="_blank" class="netflix-card">
+                            <div class="crown-icon">👑</div>
+                            <img src="${ch.logo}" alt="${ch.name}" onerror="this.src='https://via.placeholder.com/150?text=TV'">
+                            <div class="card-overlay">
+                                <div class="channel-name">${ch.name}</div>
+                                <div class="live-tag"><span class="live-dot"></span> LIVE PREMIUM</div>
                             </div>
-                            <span class="text-[10px] font-bold text-slate-200 line-clamp-1">${ch.name}</span>
-                            <div class="flex items-center gap-1 mt-1">
-                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="text-[8px] text-green-400 font-black uppercase tracking-widest">Live HD</span>
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    });
+                        </a>`;
                 });
-            } else {
-                // إذا لم يجد البيانات سيظهر لك هذا التنبيه
-                alert("خطأ: لم يتم العثور على بيانات القنوات (categories). تأكد من إغلاق المصفوفة بـ ]; قبل هذا الكود.");
-            }
-        } catch (e) {
-            alert("حدث خطأ برمي: " + e.message);
+                row.innerHTML = `<h2 class="category-title">${cat.title}</h2><div class="channels-grid">${channelsHTML}</div>`;
+                container.appendChild(row);
+            });
         }
-        
-        loadCounter();
-    }
 
-function loadCounter() {
-        // إنشاء حاوية مخفية تماماً لا يراها أحد
-        const hiddenDiv = document.createElement('div');
-        hiddenDiv.id = "sfcrc95c93xq758shkxk4edhy5h3ntkxs4b";
-        hiddenDiv.style.display = "none"; // هذا السطر يجعل العداد غير مرئي
-        document.body.appendChild(hiddenDiv);
-
-        // تحميل السكربت ليعمل في الخلفية ويرسل البيانات للوحة تحكمك
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "https://counter1.optistats.ovh/private/counter.js?c=rc95c93xq758shkxk4edhy5h3ntkxs4b&down=async";
-        script.async = true;
-        document.body.appendChild(script);
-    }
-
-    // تشغيل التطبيق
-    window.onload = loadOssamaApp;        
-</script>           
+        function toggleMenu() { document.getElementById("linksMenu").classList.toggle("hidden"); }
+        function toggleContact() {
+            const box = document.getElementById("contactBox");
+            const over = document.getElementById("modalOverlay");
+            const isH = box.style.display === "block";
+            box.style.display = isH ? "none" : "block";
+            over.style.display = isH ? "none" : "block";
+        }
+        window.onload = renderUI;
+    </script>
+</body>
+</html>
