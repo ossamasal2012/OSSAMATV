@@ -45,10 +45,10 @@ jobs:
         run: |
           mkdir -p OSSAMA TV/www
           # ننسخ index.html وأي ملفات أخرى إن وجدت
-          cp -r * OSSAMA TV/www/ 2>/dev/null || true
+          cp -r * OSSAMATV/www/ 2>/dev/null || true
           
           # تأكد من وجود ملف package.json صحيح
-          cat > yalla-goal/package.json << 'EOF'
+          cat > OSSAMATV/package.json << 'EOF'
           {
             "name": "OSSAMATV",
             "version": "2.3.0",
@@ -66,7 +66,7 @@ jobs:
 
       - name: ⚙️ Capacitor Config
         run: |
-          cat > yalla-goal/capacitor.config.json << 'EOF'
+          cat > OSSAMATV/capacitor.config.json << 'EOF'
           {
             "appId": "com.OSSAMATV.app",
             "appName": "OSSAMA TV",
@@ -86,7 +86,7 @@ jobs:
 
       - name: 🤖 Add Android Platform
         run: |
-          cd yalla-goal
+          cd OSSAMATV
           npx cap add android
 
       # ══════════════════════════════════════════
@@ -105,7 +105,7 @@ jobs:
 
       - name: 📄 Ensure All Web Assets are inside public (after sync)
         run: |
-          ASSETS="yalla-goal/android/app/src/main/assets/public"
+          ASSETS="OSSAMATV/android/app/src/main/assets/public"
           mkdir -p "$ASSETS"
           # تم التعديل هنا لنسخ كافة محتويات www لتجنب الشاشة البيضاء
           cp -r OSSAMATV/www/* "$ASSETS/"
@@ -114,8 +114,8 @@ jobs:
 
       - name: 🌐 Network Security Config
         run: |
-          mkdir -p yalla-goal/android/app/src/main/res/xml
-          cat > yalla-goal/android/app/src/main/res/xml/network_security_config.xml << 'EOF'
+          mkdir -p OSSAMATV/android/app/src/main/res/xml
+          cat > OSSAMATV/android/app/src/main/res/xml/network_security_config.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <network-security-config>
               <base-config cleartextTrafficPermitted="true">
@@ -129,7 +129,7 @@ jobs:
 
       - name: 📝 Write AndroidManifest.xml
         run: |
-          cat > yalla-goal/android/app/src/main/AndroidManifest.xml << 'EOF'
+          cat > OSSAMATV/android/app/src/main/AndroidManifest.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -167,7 +167,7 @@ jobs:
 
       - name: 🛠️ Write MainActivity.java (Fixed)
         run: |
-          MAIN_ACTIVITY=$(find yalla-goal/android -name "MainActivity.java" | head -1)
+          MAIN_ACTIVITY=$(find OSSAMA TV/android -name "MainActivity.java" | head -1)
           PACKAGE=$(grep -m1 "^package" "$MAIN_ACTIVITY" | sed 's/package //;s/;//' | tr -d '[:space:]')
           echo "Package: [$PACKAGE]"
 
@@ -221,7 +221,7 @@ jobs:
 
       - name: 🔧 Fix app/build.gradle
         run: |
-          cat >> yalla-goal/android/app/build.gradle << 'EOF'
+          cat >> OSSAMATV/android/app/build.gradle << 'EOF'
 
           // ─── حل تعارض Kotlin stdlib ───
           configurations.all {
@@ -242,7 +242,7 @@ jobs:
             -o /tmp/icon.png
           echo "✅ Icon: $(identify /tmp/icon.png | head -1)"
 
-          BASE="yalla-goal/android/app/src/main/res"
+          BASE="OSSAMATV/android/app/src/main/res"
 
           declare -A SIZES=(
             ["mipmap-mdpi"]=48
@@ -289,20 +289,20 @@ jobs:
       - name: 🔍 Final Verification
         run: |
           echo "=== assets/public ==="
-          find yalla-goal/android/app/src/main/assets -type f
+          find OSSAMATV/android/app/src/main/assets -type f
           echo ""
           echo "=== res/mipmap-xxxhdpi ==="
-          ls -lh yalla-goal/android/app/src/main/res/mipmap-xxxhdpi/ 2>/dev/null || echo "مجلد غير موجود"
+          ls -lh OSSAMATV/android/app/src/main/res/mipmap-xxxhdpi/ 2>/dev/null || echo "مجلد غير موجود"
           echo ""
           echo "=== AndroidManifest ==="
-          cat yalla-goal/android/app/src/main/AndroidManifest.xml
+          cat OSSAMATV/android/app/src/main/AndroidManifest.xml
 
       - name: 🔐 Grant Gradle Permission
-        run: chmod +x yalla-goal/android/gradlew
+        run: chmod +x OSSAMATV/android/gradlew
 
       - name: 🏗️ Build Debug APK
         run: |
-          cd yalla-goal/android
+          cd OSSAMATV/android
           ./gradlew assembleDebug --stacktrace 2>&1 | tee /tmp/gradle_output.txt
           EXIT_CODE=${PIPESTATUS[0]}
           if [ $EXIT_CODE -ne 0 ]; then
@@ -315,7 +315,7 @@ jobs:
 
       - name: 🔍 Find APK
         run: |
-          APK_PATH=$(find yalla-goal/android -name "*.apk" -type f | head -1)
+          APK_PATH=$(find OSSAMATV/android -name "*.apk" -type f | head -1)
           if [ -z "$APK_PATH" ]; then echo "❌ APK not found!"; exit 1; fi
           echo "✅ APK: $APK_PATH"
           ls -lh "$APK_PATH"
@@ -324,7 +324,7 @@ jobs:
       - name: 📤 Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: YallaGoal-v2.3-debug
+          name: OSSAMATV-v2.3-debug
           path: ${{ env.APK_PATH }}
           retention-days: 30
 
